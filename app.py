@@ -475,7 +475,5 @@ def page_not_found(e):
 #Claire est passée :)
 
 
-
-
-
+# claire N°2
 # papa N°2
