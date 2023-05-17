@@ -44,18 +44,35 @@ import json
 from flask_debugtoolbar import DebugToolbarExtension
 import os 
 import uuid
+import pytz
 
 locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
     
 app = Flask(__name__)
-#DB = TinyMongoClient().blog
 
+
+from packages.mysql import * 
+# from packages.forms import * 
+
+# Le code important est dans 'Main' : 
+# m = Main(app.config['UPLOAD_FOLDER'])
+# m.run() 
+
+print("username_mysql : ",username_mysql ,"\n")
+print("password_mysql : ",password_mysql ,"\n")
+print("hostname_mysql : ",hostname_mysql ,"\n")
+print("databasename_mysql : ",databasename_mysql ,"\n")
 
 app.debug = True
-app.config['SECRET_KEY'] = 'hard to guess string'
-#app.config['SQLALCHEMY_DATABASE_URI'] ='mysql://MissPandinou:clairePapa2021@MissPandinou.mysql.eu.pythonanywhere-services.com/MissPandinou$missPandinou'
-
-app.config['SQLALCHEMY_DATABASE_URI'] ='mysql+mysqlconnector://root:root@localhost/relation_db'
+# set a 'SECRET_KEY' to enable the Flask session cookies
+app.config['SECRET_KEY'] = 'replace with a SUPERsecretKEY '
+# source : https://blog.pythonanywhere.com/121
+SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
+    username=username_mysql,
+    password=password_mysql,
+    hostname=hostname_mysql,
+    databasename=databasename_mysql,
+)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_RECORD_QUERIES'] = True
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
