@@ -51,7 +51,7 @@ locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
 app = Flask(__name__)
 
 
-from packages.mysql import * 
+from static/packages.mysql import * 
 # from packages.forms import * 
 
 # Le code important est dans 'Main' : 
